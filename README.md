@@ -5,6 +5,8 @@ Shows a simple delta diff b/w the working tree and the staging area for the curr
 > [!WARNING]
 > Built with ChatGPT 5.2 (Go Plan).
 
+<img width="1908" height="1044" alt="W 16-00-58 05-Jan-26 - nvim _" src="https://github.com/user-attachments/assets/58bd183c-8c83-4e3c-acc0-a05465f80e52" />
+
 ## Requirements
 
 [Neovim](https://github.com/neovim/neovim) 0.8.0+
