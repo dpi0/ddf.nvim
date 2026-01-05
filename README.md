@@ -36,13 +36,6 @@ Hit `q` to quit, `CTRL-D` and `CTRL-U` to scroll down/up.
 
 ## Configuration
 
-### Options
-
-```lua
-opts = {
-}
-```
-
 ### Keybinds
 
 ```lua
@@ -62,11 +55,9 @@ keys = {
 ```lua
 return {
   'dpi0/ddf.nvim',
-  opts = {
-  },
   keys = {
     {
-      '<leader>gD',
+      '<leader>gd',
       function()
         require('ddf').show_diff()
       end,
@@ -75,3 +66,63 @@ return {
   },
 }
 ```
+
+## My `delta` Configuration
+
+Present at `~/.config/git/config`
+
+```text
+# ...
+
+[core]
+  pager = delta
+  editor = nvim
+  autocrlf = false
+  preloadindex = true # preloads the index into memory for improved performance when running Git commands like status and diff
+
+[merge]
+  conflictstyle = zdiff3 # https://www.ductile.systems/zdiff3/
+  summary = true # display a brief summary describing what was merged
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features = decorations
+  line-numbers = true
+  side-by-side = true
+  true-color = always
+  hyperlinks = true
+  navigate = true  # use n and N to move between diff sections
+
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
+
+# ...
+```
+
+## But Why When Fugitive's Diff Exists?
+
+I used to use this keybind for Fugitive for the delta diffs
+
+```lua
+  {
+    '<leader>gd',
+    function()
+      vim.cmd 'Git -c pager.diff=delta diff %'
+      vim.cmd('resize ' .. math.floor(vim.o.lines * 0.9))
+    end,
+    desc = 'Fugitive: Git diff (delta, current file, 90% height)',
+  },
+```
+
+But this behaved weirdly when using split buffers and I wanted something fullscreen at all times.
